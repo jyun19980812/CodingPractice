@@ -1,7 +1,5 @@
 # CodingPractice
 
-# CodingPractice
-
 **CodingPractice** 리포지토리는 LeetCode와 프로그래머스와 같은 다양한 코딩 플랫폼에서 해결한 SQL 코딩 연습 문제들을 모아둔 개인 아카이브입니다. SQL 실력을 향상시키기 위한 연습 기록을 남기고, 앞으로도 지속적으로 문제를 해결하며 업데이트할 예정입니다.
 
 ## 개요
