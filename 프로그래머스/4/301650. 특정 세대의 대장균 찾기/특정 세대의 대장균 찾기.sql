@@ -1,0 +1,14 @@
+WITH 2nd_Gen AS (
+    SELECT B.ID, B.PARENT_ID
+    FROM ECOLI_DATA A
+        JOIN ECOLI_DATA B ON A.ID = B.PARENT_ID
+),
+3rd_Gen AS (
+    SELECT B.ID, B.PARENT_ID
+    FROM 2nd_Gen A
+        JOIN 2nd_Gen B ON A.ID = B.PARENT_ID
+)
+SELECT ID
+FROM 3rd_Gen
+WHERE PARENT_ID NOT IN (SELECT ID 
+                        FROM 3rd_Gen) 
