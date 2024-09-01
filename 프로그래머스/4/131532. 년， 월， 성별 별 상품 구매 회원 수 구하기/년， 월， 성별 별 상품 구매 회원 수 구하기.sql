@@ -1,0 +1,13 @@
+# Upload용 커맨트
+# CTE안에 SALES_DATE을 년, 월로 나눠주고, user_id가 하나씩 있는 경우로 해서 저장할게요
+# 그 테이블을 user_info와 join을 하고 sales_date의 month를 group by해서 유저를 카운트 하는 식으로 풀어보겠습니다.
+WITH CTE AS (
+    SELECT DISTINCT USER_ID, YEAR(SALES_DATE) AS YEAR, MONTH(SALES_DATE) AS MONTH
+    FROM ONLINE_SALE
+)
+SELECT YEAR, MONTH, GENDER, COUNT(C.USER_ID) AS USERS
+FROM CTE C
+    LEFT JOIN USER_INFO UI ON C.USER_ID = UI.USER_ID
+WHERE GENDER IS NOT NULL
+GROUP BY YEAR, MONTH, GENDER
+ORDER BY YEAR, MONTH, GENDER
