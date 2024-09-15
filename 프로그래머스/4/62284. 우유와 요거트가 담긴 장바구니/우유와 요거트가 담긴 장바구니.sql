@@ -2,7 +2,7 @@
 # CART_ID 출력, ORDER BY CART_ID
 # WITH CTE로 name이 milk와 yogurt로 필터링
 # GROUP BY CART_ID 한 후, COUNT(*) 로 횟수 카운트
-# 밖에 SELECT문에서 WHERE문에서 COUNT가 2일경우 출력, CART_ID는 DISTINCT
+# 밖에 SELECT문에서 2개의 CTE문을 INNER JOIN, 출력
 WITH CTE AS (
     SELECT CART_ID, COUNT(*) AS PRODUCT_COUNT
     FROM CART_PRODUCTS
