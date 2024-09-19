@@ -1,0 +1,15 @@
+WITH RECURSIVE CTE(n) AS (
+    SELECT 0
+    UNION ALL
+    SELECT n + 1
+    FROM CTE
+    WHERE n < 23
+)
+SELECT CTE.n AS HOUR,
+       SUM(CASE
+              WHEN CTE.n = HOUR(DATETIME) THEN 1
+              ELSE 0 END
+           ) AS COUNT
+FROM ANIMAL_OUTS, CTE
+GROUP BY HOUR
+ORDER BY HOUR
