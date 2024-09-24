@@ -1,0 +1,10 @@
+/* 
+ ITEM_INFO: 아이템 정보 테이블, ITEM_TREE: 아이템 관계 테이블
+ ROOT 아이템의 아이템 ID 및 아이템 명 출력, ORDER BY ITEM_ID
+ ITEM_INFO와 ITEM_TREE 를 조인, PARENT_ITEM_ID가 NULL인 아이템 ID 및 아이템 명 출력
+*/
+SELECT II.ITEM_ID, ITEM_NAME
+FROM ITEM_INFO II
+    JOIN ITEM_TREE IT ON II.ITEM_ID = IT.ITEM_ID AND
+                         IT.PARENT_ITEM_ID IS NULL
+ORDER BY ITEM_ID
