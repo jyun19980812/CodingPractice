@@ -12,6 +12,6 @@ def solution(video_len, pos, op_start, op_end, commands):
             p = max(p - 10, 0)
     if s <= p <= e:
         p = e
-    m = str(p // 60) if p // 60 >= 10 else f"0{p//60}"
-    s = str(p % 60) if p % 60 >= 10 else f"0{p%60}"
-    return m + ":" + s
+    m = str(p // 60) if p // 60 >= 10 else f"0{p // 60}"
+    s = str(p % 60) if p % 60 >= 10 else f"0{p % 60}"
+    return f"{m}:{s}"
