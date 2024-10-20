@@ -1,15 +1,22 @@
-SELECT DISTINCT num AS ConsecutiveNums
-FROM (
-    SELECT 
-        LAG(id) OVER (ORDER BY id) AS prev_id,
+/*
+    목표:3번이상 연속되는 숫자 찾기
+    출력: ConsecutiveNums
+    CTE 사용해서 LAG() LEAD() ORDER BY id 
+    밖에 SELECT문에서 만약 이전 숫자와 이후 숫자가 같을경우 출력
+*/
+WITH CTE AS (
+    SELECT
         id,
-        LEAD(id) OVER (ORDER BY id) AS next_id,
-        LAG(num) OVER (ORDER BY id) AS prev_num,
         num,
-        LEAD(num) OVER (ORDER BY id) AS next_num
-    FROM logs
-) subquery
-WHERE prev_num = num 
-  AND num = next_num
-  AND next_id - id = 1 
-  AND id - prev_id = 1;
+        LAG(num) OVER (ORDER BY id) AS prev_num,
+        LEAD(num) OVER (ORDER BY id) AS aft_num 
+    FROM 
+        Logs
+)
+SELECT
+    DISTINCT num AS ConsecutiveNums
+FROM
+    CTE
+WHERE 
+    num = prev_num AND
+    num = aft_num
