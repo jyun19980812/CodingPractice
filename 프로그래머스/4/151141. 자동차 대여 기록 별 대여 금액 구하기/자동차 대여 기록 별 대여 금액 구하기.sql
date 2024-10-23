@@ -4,9 +4,9 @@
     자동차 종류가 트럭인 자동차의 대여기록에 대해서, 대여기록별로 대여금액 구하기
     출력: HISTORY_ID, FEE(대여기록 별 대여금액 계산한거), ORDER BY FEE DESC, HISTORY_ID DESC
     CTE문에서 CAR_RENTAL_COMPANY_CAR랑 CAR_RENTAL_COMPANY_RENTAL_HISTORY를 조인, CAR_TYPE이 '트럭'인걸로 필터링
-    DATEDIFF(END_DATE, START_DATE) AS duration
-    밖에서 CTE랑 CAR_RENTAL_COMPANY_DISCOUNT_PLAN을 조인 할껀데, CAR_TYPE을 기준으로, 그리고 트럭인것만
-    SELECT문에서 FEE를 구하면 될 듯 합니다
+    DATEDIFF(END_DATE, START_DATE) AS duration, 그리고 Duration Type 구하기
+    밖에서 CTE랑 CAR_RENTAL_COMPANY_DISCOUNT_PLAN을 조인 할껀데, CAR_TYPE과 Duration type을 기준으로, 그리고 트럭인것만
+    SELECT문에서 FEE를 구하기
 */
 WITH CTE AS (
     SELECT
