@@ -1,11 +1,12 @@
 /*
-    ONLINE_SALE: 온라인 상품 판매 정보, OFFLINE_SALE: 오프라인 상품 판매 정보
-    2022년 3월의 오프라인/온라인 상품 판매 정보 출력, 오프라인 USER_ID는 NULL
+    ONLINE_SALE: 온라인 판매 테이블, OFFLINE_SALE: 오프라인 판매 테이블
+    목표:2022년 3월의 오프라인/온라인 상품 판매 데이터 정보 출력,
+    OFFLINE_SALE테이블의 판매데이터의 USER_ID값은 NULL로 표시
     출력: SALES_DATE, PRODUCT_ID, USER_ID, SALES_AMOUNT
     ORDER BY SALES_DATE, PRODUCT_ID, USER_ID
-    각 조건에 맞게 필터링을 해서 UNION ALL로 출력
+    각각 조건에 맞춰서 SELECT문 두개로 구한다음 UNION ALL로 합치기
 */
-SELECT 
+SELECT
     DATE_FORMAT(SALES_DATE, "%Y-%m-%d") AS SALES_DATE,
     PRODUCT_ID,
     USER_ID,
@@ -13,9 +14,10 @@ SELECT
 FROM
     ONLINE_SALE
 WHERE
-    SALES_DATE BETWEEN "2022-03-01" AND "2022-03-31"
+    YEAR(SALES_DATE) = 2022 
+    AND MONTH(SALES_DATE) = 3
 
-UNION
+UNION ALL
 
 SELECT
     DATE_FORMAT(SALES_DATE, "%Y-%m-%d") AS SALES_DATE,
@@ -25,7 +27,8 @@ SELECT
 FROM
     OFFLINE_SALE
 WHERE
-    SALES_DATE BETWEEN "2022-03-01" AND "2022-03-31"
+    YEAR(SALES_DATE) = 2022 
+    AND MONTH(SALES_DATE) = 3
 ORDER BY
     SALES_DATE, 
     PRODUCT_ID, 
