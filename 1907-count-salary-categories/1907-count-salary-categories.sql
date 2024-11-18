@@ -2,7 +2,7 @@
     문제: 카테고리 별 은행 계좌 개수 카운트 한거 출력
     출력: category, accounts_count
     Low < 20000, 20000 <= average <= 50000, 50000 < high
-    SELECT 문으로 각각의 조건에 따라서 CASE WHEN으로 구하고, UNION ALL로 합치기
+    SELECT 문으로 각각의 조건에 따라서 COUNT으로 구하고, UNION ALL로 합치기
 */
 SELECT
     "Low Salary" AS category,
