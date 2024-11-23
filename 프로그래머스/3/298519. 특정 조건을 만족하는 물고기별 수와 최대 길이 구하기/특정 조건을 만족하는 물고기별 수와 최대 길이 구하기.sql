@@ -1,14 +1,27 @@
--- 코드를 작성해주세요
+/*
+    물고기 평균 길이가 33cm 이상인 물고기들을 종류별로 분류 후 정보 출력
+    출력: FISH_COUNT, MAX_LENGTH, FISH_TYPE
+    FISH_TYPE으로 먼저 그룹 한 후 HAVING절에서 AVG(LENGTH) >= 33 하고
+    필요한 내용들을 출력하면 풀릴듯 합니다.
+*/
 WITH CTE AS (
-    SELECT FISH_TYPE, 
-           COUNT(*) AS FISH_COUNT, 
-           SUM(CASE WHEN LENGTH > 10 THEN LENGTH ELSE 10 END) /
-           COUNT(*) AS LENGTH_AVG,
-           MAX(LENGTH) AS MAX_LENGTH
-    FROM FISH_INFO
-    GROUP BY FISH_TYPE
+    SELECT
+        ID,
+        FISH_TYPE,
+        CASE
+            WHEN LENGTH IS NULL THEN 10 
+            ELSE LENGTH 
+        END AS LENGTH
+    FROM
+        FISH_INFO
 )
-SELECT FISH_COUNT, MAX_LENGTH, FISH_TYPE
-FROM CTE
-WHERE LENGTH_AVG >=  33
-ORDER BY FISH_TYPE ASC
+SELECT
+    COUNT(DISTINCT ID) AS FISH_COUNT,
+    MAX(LENGTH) AS MAX_LENGTH,
+    FISH_TYPE
+FROM
+    CTE
+GROUP BY
+    FISH_TYPE
+HAVING
+    AVG(LENGTH) >= 33
