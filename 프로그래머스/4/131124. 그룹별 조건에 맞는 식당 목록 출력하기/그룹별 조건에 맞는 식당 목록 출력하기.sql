@@ -1,15 +1,30 @@
-# CTE로 멤버 아이디 별 카운트, 가장 높은 숫자를 가진 멤버만
-# 그후 밖에서 멤버 아이디로 조인, 회원 이름, 리뷰 텍스트, 리뷰 작성일 출력
-# 리뷰 작성일 오름차순, 리뷰 텍스트 오름차순
+/*
+    MEMBER_PROFILE: 고객 정보 테이블, REST_REVIEW: 식당 리뷰 정보 테이블
+    목표: 리뷰를 가장 많이 작성한 회원의 리뷰 조회
+    출력: MEMBER_NAME, REVIEW_TEXT, REVIEW_DATE, ORDER BY REVIEW_DATE, REVIEW_TEXT
+    CTE로 먼저 가장 리뷰 많이 작성한 인원 아이디 구해놓고, 밖에 SELECT문에서 MEMBER_PROFILE과
+    REST_REVIEW 합치고, MEMBER_ID가 CTE안에 있는 아이디와 같은거로 필터링
+*/
 WITH CTE AS (
-    SELECT MEMBER_ID, COUNT(*) AS cnts
-    FROM REST_REVIEW
-    GROUP BY MEMBER_ID
-    ORDER BY cnts DESC
+    SELECT
+        MEMBER_ID
+    FROM
+        REST_REVIEW
+    GROUP BY
+        MEMBER_ID
+    ORDER BY
+        COUNT(REVIEW_ID) DESC
     LIMIT 1
 )
-SELECT MEMBER_NAME, REVIEW_TEXT, DATE_FORMAT(REVIEW_DATE, "%Y-%m-%d") AS REVIEW_DATE
-FROM REST_REVIEW RR
+SELECT
+    MEMBER_NAME,
+    RR.REVIEW_TEXT,
+    DATE_FORMAT(RR.REVIEW_DATE, "%Y-%m-%d") AS REVIEW_DATE
+FROM
+    REST_REVIEW RR
     JOIN MEMBER_PROFILE MP ON RR.MEMBER_ID = MP.MEMBER_ID
-WHERE RR.MEMBER_ID = (SELECT MEMBER_ID FROM CTE)
-ORDER BY REVIEW_DATE ASC, REVIEW_TEXT ASC
+WHERE
+    RR.MEMBER_ID IN (SELECT * FROM CTE)
+ORDER BY 
+    REVIEW_DATE,
+    REVIEW_TEXT
