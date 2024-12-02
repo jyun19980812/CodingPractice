@@ -1,21 +1,23 @@
--- 우유와 요거트를 동시에 구입한 장바구니가 있는지?
-# CART_ID 출력, ORDER BY CART_ID
-# WITH CTE로 name이 milk와 yogurt로 필터링
-# GROUP BY CART_ID 한 후, COUNT(*) 로 횟수 카운트
-# 밖에 SELECT문에서 2개의 CTE문을 INNER JOIN, 출력
+/*
+    목표: 우유와 요거트를 동시에 구입한 장바구니의 아이디 조회
+    출력: CART_ID, ORDER BY CART_ID
+    CTE로 Milk를 구입한 장바구니 아이디 필터링, 그러고 밖에 SELECT문에서
+    Yogurt 구입한 장바구니로 필터링 하고, milk 구입한 장바구니 아이디와 매칭되는것으로 필터링
+*/
 WITH CTE AS (
-    SELECT CART_ID, COUNT(*) AS PRODUCT_COUNT
-    FROM CART_PRODUCTS
-    WHERE NAME = "Milk"
-    GROUP BY CART_ID
-),
-CTE2 AS (
-    SELECT CART_ID, COUNT(*) AS PRODUCT_COUNT
-    FROM CART_PRODUCTS
-    WHERE NAME = "Yogurt"
-    GROUP BY CART_ID
+    SELECT
+        CART_ID
+    FROM
+        CART_PRODUCTS
+    WHERE
+        NAME = "Milk"
 )
-SELECT CTE.CART_ID
-FROM CTE
-    JOIN CTE2 ON CTE.CART_ID = CTE2.CART_ID
-ORDER BY CTE.CART_ID
+SELECT
+    CART_ID
+FROM
+    CART_PRODUCTS
+WHERE
+    NAME = "Yogurt" AND
+    CART_ID IN (SELECT * FROM CTE)
+ORDER BY
+    CART_ID
