@@ -1,5 +1,4 @@
 /*
-    MEMBER_PROFILE: 고객 정보 테이블, REST_REVIEW: 식당 리뷰 정보 테이블
     목표: 리뷰를 가장 많이 작성한 회원의 리뷰 조회
     출력: MEMBER_NAME, REVIEW_TEXT, REVIEW_DATE, ORDER BY REVIEW_DATE, REVIEW_TEXT
     CTE로 먼저 가장 리뷰 많이 작성한 인원 아이디 구해놓고, 밖에 SELECT문에서 MEMBER_PROFILE과
