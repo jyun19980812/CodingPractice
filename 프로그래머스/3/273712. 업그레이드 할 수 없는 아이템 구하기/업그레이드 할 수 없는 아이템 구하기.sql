@@ -1,4 +1,9 @@
-# Upload용 커맨트
+/*
+    더이상 업그레이드가 불가한 아이템의 정보 출력
+    출력: ITEM_ID, ITEM_NAME, RARITY ORDER BY ITEM_ID DESC
+    ITEM_TREE 테이블에서 PARENT_ITEM_ID가 NULL이 아니라면
+    ROOT ITEM이기 때문에 WHERE절에 서브쿼리로 필터링 후 출력
+*/
 SELECT ITEM_ID, ITEM_NAME, RARITY 
 FROM ITEM_INFO
 WHERE ITEM_ID NOT IN (
