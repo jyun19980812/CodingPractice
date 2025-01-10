@@ -1,8 +1,8 @@
 /*
     목표: 리뷰를 가장 많이 작성한 회원의 리뷰 조회
     출력: MEMBER_NAME, REVIEW_TEXT, REVIEW_DATE, ORDER BY REVIEW_DATE, REVIEW_TEXT
-    CTE로 먼저 가장 리뷰 많이 작성한 인원 아이디 구해놓고, 밖에 SELECT문에서 MEMBER_PROFILE과
-    REST_REVIEW 합치고, MEMBER_ID가 CTE안에 있는 아이디와 같은거로 필터링
+    CTE로 먼저 가장 리뷰 많이 작성한 인원 아이디 구해놓기, 그 후 밖에 SELECT문에서 
+    RMEMBER_PROFILE과 REST_REVIEW 합치고, MEMBER_ID가 CTE안에 있는 아이디와 같은거로 필터링
 */
 WITH CTE AS (
     SELECT
