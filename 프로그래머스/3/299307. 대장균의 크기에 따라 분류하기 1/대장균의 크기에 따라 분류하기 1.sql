@@ -1,3 +1,8 @@
+/*
+    대장균 개체 크기가 =<100 이면 LOW, 100<x<=1000이면 MEDIUM, >1000이면 HIGH로 분류
+    출력: ID, SIZE, ORDER BY ID ASC
+    CASE WHEN 으로 SIZE OF COLONY가 각각의 조건에 따라 출력하게 만들면 풀 수 있음
+*/
 SELECT ID,
     CASE
         WHEN SIZE_OF_COLONY <= 100 THEN "LOW"
