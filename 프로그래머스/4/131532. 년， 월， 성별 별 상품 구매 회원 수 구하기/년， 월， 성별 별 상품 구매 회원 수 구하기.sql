@@ -1,6 +1,11 @@
-# Upload용 커맨트
-# CTE안에 SALES_DATE을 년, 월로 나눠주고, user_id가 하나씩 있는 경우로 해서 저장할게요
-# 그 테이블을 user_info와 join을 하고 sales_date의 month를 group by해서 유저를 카운트 하는 식으로 풀어보겠습니다.
+/*
+    목표: 년, 월, 성별 별로 상품을 구매한 회원수 집계
+    출력: YEAR, MONTH, GENDER, USERS ORDER BY 1,2,3
+    CTE로 ONLINE SALE 테이블에서 먼저 고유 유저 아이디, 그리고 년 월을 뽑아주고
+    밖에 쿼리에서 USER 테이블과 조인을 하는데 온라인 세일 정보가 전부 필요하니 CTE를 기준으로 조인
+    이후 GENDER가 없는건 제외해주고, 년,월,성별 별로 그룹해서 유저 수 카운트 
+*/
+
 WITH CTE AS (
     SELECT DISTINCT USER_ID, YEAR(SALES_DATE) AS YEAR, MONTH(SALES_DATE) AS MONTH
     FROM ONLINE_SALE
