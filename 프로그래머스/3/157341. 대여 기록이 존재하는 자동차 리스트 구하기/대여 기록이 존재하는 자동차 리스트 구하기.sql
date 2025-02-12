@@ -1,4 +1,9 @@
--- 코드를 입력하세요
+/*
+    목표: 자동차 종류가 세단인 자동차들 중 10월에 대여를 시작한 기록이 있는 자동차 ID 리스트 출력
+    출력: CAR_ID
+    먼저 CAR_RENTAL_COMPANY_CAR이랑 CAR_RENTAL_COMPANY_RENTAL_HISTORY를 조인해 주는데 
+    WHERE절에서 2022년 10월에 대여기록이 있는것으로 필터링 후 CAR_TYPE이 세단인것으로 필터링 후 출력
+*/
 SELECT DISTINCT CRCC.CAR_ID
 FROM CAR_RENTAL_COMPANY_CAR CRCC
     JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY CRCRH ON CRCC.CAR_ID = CRCRH.CAR_ID
